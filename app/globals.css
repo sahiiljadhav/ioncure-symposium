@@ -1,0 +1,201 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* Updated color tokens to red theme */
+  --background: #ffffff; /* Main background color */
+  --foreground: #475569; /* Primary text color */
+  --card: #f1f5f9; /* Card background color */
+  --card-foreground: #374151; /* Text color on cards */
+  --popover: #ffffff; /* Popover background */
+  --popover-foreground: #475569; /* Popover text color */
+  --primary: #dc2626; /* Primary action color - Red-600 */
+  --primary-foreground: #ffffff; /* Text color on primary actions */
+  --secondary: #ef4444; /* Secondary action color - Red-500 */
+  --secondary-foreground: #ffffff; /* Text color on secondary actions */
+  --muted: #f1f5f9; /* Muted background color */
+  --muted-foreground: #374151; /* Muted text foreground */
+  --accent: #dc2626; /* Accent color for highlights */
+  --accent-foreground: #ffffff; /* Text color for accent elements */
+  --destructive: #e53e3e; /* Destructive color for alerts */
+  --destructive-foreground: #ffffff; /* Text color for destructive actions */
+  --border: #e2e8f0; /* Border color */
+  --input: #ffffff; /* Input field background */
+  --ring: rgba(220, 38, 38, 0.6); /* Ring color for focus states */
+  --chart-1: #fca5a5; /* Chart color 1 - Red-300 */
+  --chart-2: #f87171; /* Chart color 2 - Red-400 */
+  --chart-3: #ef4444; /* Chart color 3 - Red-500 */
+  --chart-4: #dc2626; /* Chart color 4 - Red-600 */
+  --chart-5: #b91c1c; /* Chart color 5 - Red-700 */
+  --radius: 0.5rem; /* Rounding for corners */
+  --sidebar: #f1f5f9; /* Sidebar background */
+  --sidebar-foreground: #475569; /* Sidebar text color */
+  --sidebar-primary: #ffffff; /* Primary sidebar background */
+  --sidebar-primary-foreground: #dc2626; /* Primary sidebar text color */
+  --sidebar-accent: #ef4444; /* Sidebar accent color */
+  --sidebar-accent-foreground: #ffffff; /* Sidebar accent text color */
+  --sidebar-border: #e2e8f0; /* Sidebar border color */
+  --sidebar-ring: rgba(220, 38, 38, 0.6); /* Sidebar ring color */
+  --font-geist: "Geist Sans", sans-serif;
+  --font-manrope: "Manrope", serif;
+}
+
+.dark {
+  --background: #0f172a;
+  --foreground: #f8fafc;
+  --card: #1e293b;
+  --card-foreground: #f8fafc;
+  --popover: #1e293b;
+  --popover-foreground: #f8fafc;
+  --primary: #dc2626;
+  --primary-foreground: #ffffff;
+  --secondary: #ef4444;
+  --secondary-foreground: #ffffff;
+  --muted: #334155;
+  --muted-foreground: #cbd5e1;
+  --accent: #dc2626;
+  --accent-foreground: #ffffff;
+  --destructive: #dc2626;
+  --destructive-foreground: #ffffff;
+  --border: #334155;
+  --input: #1e293b;
+  --ring: rgba(220, 38, 38, 0.6);
+  --chart-1: #fca5a5;
+  --chart-2: #f87171;
+  --chart-3: #ef4444;
+  --chart-4: #dc2626;
+  --chart-5: #b91c1c;
+  --sidebar: #1e293b;
+  --sidebar-foreground: #f8fafc;
+  --sidebar-primary: #dc2626;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ef4444;
+  --sidebar-accent-foreground: #ffffff;
+  --sidebar-border: #334155;
+  --sidebar-ring: rgba(220, 38, 38, 0.6);
+}
+
+@theme inline {
+  --font-sans: var(--font-geist);
+  --font-serif: var(--font-manrope);
+  --font-mono: ui-monospace, SFMono-Regular, "SF Mono", Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+}
+
+/* Updated animations and background patterns for red theme */
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-glow {
+  0%,
+  100% {
+    box-shadow: 0 0 20px rgba(220, 38, 38, 0.3);
+  }
+  50% {
+    box-shadow: 0 0 40px rgba(220, 38, 38, 0.6);
+  }
+}
+
+@keyframes gradient-shift {
+  0%,
+  100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
+}
+
+.animate-gradient {
+  animation: gradient-shift 8s ease-in-out infinite;
+  background-size: 200% 200%;
+}
+
+/* New gradient mesh pattern with red colors */
+.bg-gradient-mesh {
+  background: radial-gradient(circle at 20% 80%, rgba(220, 38, 38, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(239, 68, 68, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(220, 38, 38, 0.04) 0%, transparent 50%),
+    linear-gradient(135deg, rgba(239, 68, 68, 0.02) 0%, rgba(220, 38, 38, 0.02) 100%);
+}
+
+/* New organic background pattern */
+.bg-organic-pattern {
+  background: radial-gradient(ellipse at top left, rgba(220, 38, 38, 0.1) 0%, transparent 50%),
+    radial-gradient(ellipse at bottom right, rgba(239, 68, 68, 0.1) 0%, transparent 50%),
+    linear-gradient(45deg, rgba(220, 38, 38, 0.02) 0%, rgba(239, 68, 68, 0.02) 100%);
+}
+
+/* Enhanced card styles with subtle shadows */
+.card-enhanced {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(220, 38, 38, 0.1);
+  box-shadow: 0 8px 32px rgba(220, 38, 38, 0.1);
+}
+
+.card-enhanced:hover {
+  box-shadow: 0 12px 40px rgba(220, 38, 38, 0.15);
+  transform: translateY(-2px);
+}
