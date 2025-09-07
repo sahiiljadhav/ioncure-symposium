@@ -395,51 +395,7 @@ export default function IonCureConference() {
         </div>
       </section>
 
-      {/* 2024 Keynote Section */}
-      <section className="py-20 bg-background">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-left mb-16">
-            <h2 className="text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-4">2024 Keynote</h2>
-            <p className="text-xl text-muted-foreground max-w-3xl">
-              Watch our featured keynote presentation from the 2024 conference
-            </p>
-          </div>
-
-          <div className="relative">
-            <Card className="bg-gradient-to-br from-card to-muted/30 border-2 border-primary/20">
-              <CardContent className="p-4 sm:p-8">
-                <div className="grid md:grid-cols-12 gap-8 items-center">
-                  <div className="md:col-span-8">
-                    <YouTubeEmbed
-                      videoId="Nd94VVUy3vw"
-                      title="2024 Keynote Presentation"
-                      className="mb-6 md:mb-0"
-                      autoplay={false}
-                      muted={false}
-                      loop={false}
-                      controls={true}
-                      aspectRatio="16:9"
-                    />
-                  </div>
-                  <div className="md:col-span-4 flex flex-col justify-center">
-                    <h3 className="text-2xl font-bold text-foreground mb-4">2024 Opening Address</h3>
-                    <p className="text-muted-foreground mb-6">Dr. Elizabeth Chen presents groundbreaking research on ion channel therapeutics and their applications in treating neurological disorders.</p>
-                    <div className="flex justify-start mt-4">
-                      <Button
-                        variant="outline"
-                        className="hover:bg-primary hover:text-primary-foreground transition-all duration-300 bg-transparent"
-                        onClick={() => window.open("https://youtube.com", '_blank')}
-                      >
-                        Watch Full Keynote on YouTube
-                      </Button>
-                    </div>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
+      
 
       {/* Conference Highlights Section */}
       <section className="py-20 bg-gradient-mesh">
