@@ -109,7 +109,7 @@ export default function CalendarPage() {
               />
               <span className="font-bold text-foreground">IonCure</span>
             </div>
-            <div className="hidden md:flex space-x-8">
+            <div className="flex space-x-4 md:space-x-8">
               {[
                 { id: "/", label: "Home" },
                 { id: "/about", label: "About" },
