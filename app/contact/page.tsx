@@ -56,7 +56,7 @@ export default function ContactPage() {
               <img 
                 src="/Logo_Ioncure-removebg-preview.png" 
                 alt="IonCure Logo" 
-                className="w-8 h-8 object-contain"
+                className="w-12 h-12 object-contain"
               />
             </div>
             <div className="hidden md:flex space-x-8">
@@ -94,9 +94,9 @@ export default function ContactPage() {
             </p>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12">
+          <div className="max-w-5xl mx-auto">
             {/* Contact Information */}
-            <div className="space-y-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
               {/* Primary Contact */}
               <Card className="card-enhanced">
                 <CardHeader>
