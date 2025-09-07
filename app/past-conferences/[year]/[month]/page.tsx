@@ -76,7 +76,6 @@ export default function MonthYearPage({ params }: MonthYearPageProps) {
                 alt="IonCure Logo" 
                 className="w-8 h-8 object-contain"
               />
-              <span className="font-bold text-foreground">IonCure</span>
             </div>
             <div className="hidden md:flex space-x-8">
               {[
