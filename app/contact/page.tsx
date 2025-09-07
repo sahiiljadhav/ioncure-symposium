@@ -56,7 +56,7 @@ export default function ContactPage() {
               <img 
                 src="/Logo_Ioncure-removebg-preview.png" 
                 alt="IonCure Logo" 
-                className="w-12 h-12 object-contain"
+                className="w-16 h-16 object-contain"
               />
             </div>
             <div className="hidden md:flex space-x-8">
