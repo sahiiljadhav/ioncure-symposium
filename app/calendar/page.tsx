@@ -102,9 +102,11 @@ export default function CalendarPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-br from-primary to-secondary rounded-lg flex items-center justify-center animate-pulse-glow">
-                <span className="text-primary-foreground font-bold text-sm">IR</span>
-              </div>
+              <img 
+                src="/Logo_Ioncure-removebg-preview.png" 
+                alt="IonCure Logo" 
+                className="w-8 h-8 object-contain"
+              />
               <span className="font-bold text-foreground">IonCure</span>
             </div>
             <div className="hidden md:flex space-x-8">
@@ -112,8 +114,10 @@ export default function CalendarPage() {
                 { id: "/", label: "Home" },
                 { id: "/about", label: "About" },
                 { id: "/speakers", label: "Speakers" },
+                { id: "/timeline", label: "Timeline" },
                 { id: "/calendar", label: "Calendar" },
-                { id: "/register", label: "Register" },
+                { id: "/past-conferences", label: "Past Conferences" },
+                { id: "/contact", label: "Contact" },
               ].map((item) => (
                 <a
                   key={item.id}
@@ -130,7 +134,7 @@ export default function CalendarPage() {
         </div>
       </nav>
 
-      <section className="pt-16 py-20 bg-background">
+      <section className="pt-24 py-20 bg-background">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Conference Calendar</h2>
@@ -214,8 +218,10 @@ export default function CalendarPage() {
                 <a href="/" className="block text-muted-foreground hover:text-primary transition-colors">Home</a>
                 <a href="/about" className="block text-muted-foreground hover:text-primary transition-colors">About</a>
                 <a href="/speakers" className="block text-muted-foreground hover:text-primary transition-colors">Speakers</a>
+                <a href="/timeline" className="block text-muted-foreground hover:text-primary transition-colors">Timeline</a>
                 <a href="/calendar" className="block text-muted-foreground hover:text-primary transition-colors">Calendar</a>
-                <a href="/register" className="block text-muted-foreground hover:text-primary transition-colors">Register</a>
+                <a href="/past-conferences" className="block text-muted-foreground hover:text-primary transition-colors">Past Conferences</a>
+                <a href="/contact" className="block text-muted-foreground hover:text-primary transition-colors">Contact</a>
               </div>
             </div>
             <div>

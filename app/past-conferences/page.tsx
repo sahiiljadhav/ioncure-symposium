@@ -1,9 +1,15 @@
 "use client"
 
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { speakers, contactInfo } from "@/lib/data"
+import React from "react"
+import { Card, CardContent } from "@/components/ui/card"
+import { ArrowRight } from "lucide-react"
+import { contactInfo } from "@/lib/data"
+import { 
+  getAvailableMonthsYears
+} from "@/lib/past-conferences-data"
 
-export default function SpeakersPage() {
+export default function PastConferencesPage() {
+  const availableMonthsYears = getAvailableMonthsYears()
 
   return (
     <div className="min-h-screen bg-background">
@@ -33,7 +39,7 @@ export default function SpeakersPage() {
                   key={item.id}
                   href={item.id}
                   className={`text-sm font-medium transition-all duration-300 hover:text-primary hover:scale-105 ${
-                    item.id === "/speakers" ? "text-primary font-semibold" : "text-muted-foreground"
+                    item.id === "/past-conferences" ? "text-primary font-semibold" : "text-muted-foreground"
                   }`}
                 >
                   {item.label}
@@ -44,39 +50,68 @@ export default function SpeakersPage() {
         </div>
       </nav>
 
+      {/* Hero Section */}
       <section className="pt-24 py-20 bg-gradient-mesh">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-foreground mb-4">Meet Our Esteemed Speakers</h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Learn from the world's leading experts in ion channel research and therapeutics
+            <h1 className="text-4xl md:text-5xl font-bold text-foreground mb-6">
+              <span className="bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent">
+                Past Conferences
+              </span>
+            </h1>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Explore our extensive archive of past conferences. 
+              Watch recordings, review presentations, and discover insights from leading researchers.
             </p>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {speakers.map((speaker, index) => (
-              <Card
-                key={index}
-                className="group card-enhanced hover:shadow-lg transition-all duration-300 hover:-translate-y-1"
+        </div>
+      </section>
+
+      {/* Month/Year Photo Panels */}
+      <section className="py-20 bg-background">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl font-bold text-foreground mb-4">Browse by Month & Year</h2>
+            <p className="text-lg text-muted-foreground">
+              Select a month and year to explore conferences from that period
+            </p>
+          </div>
+          
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            {availableMonthsYears.map((item, index) => (
+              <a
+                key={`${item.year}-${item.month}`}
+                href={`/past-conferences/${item.year}/${encodeURIComponent(item.month)}`}
+                className="block"
               >
-                <CardHeader className="text-center">
-                  <div className="w-32 h-32 mx-auto mb-4 rounded-full overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10 ring-2 ring-primary/20">
+                <Card
+                className="group cursor-pointer transition-all duration-300 hover:scale-105 hover:shadow-lg hover:shadow-md"
+                >
+                  <div className="relative overflow-hidden rounded-t-lg">
                     <img
-                      src={speaker.image || "/placeholder.svg"}
-                      alt={speaker.name}
-                      className="w-full h-full object-cover"
+                      src={item.imageUrl || "/conference-networking-background.png"}
+                      alt={`${item.month} ${item.year} Conferences`}
+                      className="w-full h-32 object-cover group-hover:scale-110 transition-transform duration-300"
                     />
+                    <div className="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <ArrowRight className="w-8 h-8 text-white" />
+                    </div>
                   </div>
-                  <CardTitle className="text-xl font-bold text-foreground">{speaker.name}</CardTitle>
-                  <CardDescription className="text-primary font-medium">{speaker.title}</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground text-center leading-relaxed">{speaker.bio}</p>
-                </CardContent>
-              </Card>
+                  <CardContent className="p-4">
+                    <h3 className="font-semibold text-foreground mb-1 group-hover:text-primary transition-colors">
+                      {item.month} {item.year}
+                    </h3>
+                    <p className="text-sm text-muted-foreground">
+                      {item.count} Conference{item.count !== 1 ? 's' : ''}
+                    </p>
+                  </CardContent>
+                </Card>
+              </a>
             ))}
           </div>
         </div>
       </section>
+
 
       {/* Footer */}
       <footer className="bg-muted/30 py-12">
@@ -98,8 +133,8 @@ export default function SpeakersPage() {
                 <a href="/speakers" className="block text-muted-foreground hover:text-primary transition-colors">Speakers</a>
                 <a href="/timeline" className="block text-muted-foreground hover:text-primary transition-colors">Timeline</a>
                 <a href="/calendar" className="block text-muted-foreground hover:text-primary transition-colors">Calendar</a>
-                <a href="/contact" className="block text-muted-foreground hover:text-primary transition-colors">Contact</a>
                 <a href="/past-conferences" className="block text-muted-foreground hover:text-primary transition-colors">Past Conferences</a>
+                <a href="/contact" className="block text-muted-foreground hover:text-primary transition-colors">Contact</a>
               </div>
             </div>
             <div>

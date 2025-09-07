@@ -70,14 +70,7 @@ export interface ConferenceInfo {
   earlyBirdFee?: string
 }
 
-export interface Sponsor {
-  id: string
-  name: string
-  logo: string
-  tier: 'platinum' | 'gold' | 'silver' | 'bronze'
-  website?: string
-  description?: string
-}
+
 
 // Conference Information
 export const conferenceInfo: ConferenceInfo = {
@@ -174,6 +167,19 @@ export const speakers: Speaker[] = [
     expertise: ["Ion Channel Biophysics", "Historical Perspective", "Research Evolution"],
     publications: 203,
     patents: 23
+  },
+  {
+    id: "speaker-7",
+    name: "Dr. Maria Rodriguez",
+    title: "Associate Professor, MIT",
+    bio: "Pioneering researcher in ion channel computational modeling and AI-driven drug discovery.",
+    image: "/professional-woman-scientist-headshot.png",
+    day: 27,
+    session: "AI-Driven Ion Channel Discovery",
+    time: "16:00-17:30",
+    expertise: ["Computational Biology", "AI/ML", "Drug Discovery"],
+    publications: 67,
+    patents: 5
   }
 ]
 
@@ -311,7 +317,7 @@ export const conferenceDays: ConferenceDay[] = [
 export const testimonials: Testimonial[] = [
   {
     id: "testimonial-1",
-    name: "Dr. Jennifer Martinez",
+    name: "Dr. Sangit Martinez",
     title: "Professor of Neuroscience, Yale University",
     content: "The IonCure Rx Conference consistently delivers cutting-edge insights that directly impact my research. The virtual format made it accessible to my entire team.",
     rating: 5,
@@ -349,6 +355,7 @@ export const videoSnippets: VideoSnippet[] = [
     description: "Dr. Chen's groundbreaking presentation on TRP channel mechanisms",
     thumbnail: "/placeholder-bmcuw.png",
     duration: "3:45",
+    url: "https://youtu.be/Nd94VVUy3vw?si=kq8sIZl2RYswjF92",
     year: 2024,
     views: 1250
   },
@@ -358,6 +365,7 @@ export const videoSnippets: VideoSnippet[] = [
     description: "Leading experts discuss emerging therapeutic targets",
     thumbnail: "/placeholder-63aj6.png",
     duration: "5:20",
+    url: "https://youtu.be/Nd94VVUy3vw?si=kq8sIZl2RYswjF92",
     year: 2024,
     views: 890
   },
@@ -367,6 +375,7 @@ export const videoSnippets: VideoSnippet[] = [
     description: "Latest findings in calcium channel modulation",
     thumbnail: "/placeholder-ijhs1.png",
     duration: "4:15",
+    url: "https://youtu.be/Nd94VVUy3vw?si=kq8sIZl2RYswjF92",
     year: 2024,
     views: 1100
   },
@@ -376,38 +385,13 @@ export const videoSnippets: VideoSnippet[] = [
     description: "How attendees connected and collaborated virtually",
     thumbnail: "/placeholder-sy9jt.png",
     duration: "2:30",
+    url: "https://youtu.be/Nd94VVUy3vw?si=kq8sIZl2RYswjF92",
     year: 2024,
     views: 650
   }
 ]
 
-// Sponsors - EASILY EDITABLE
-export const sponsors: Sponsor[] = [
-  {
-    id: "sponsor-1",
-    name: "IonTech Pharmaceuticals",
-    logo: "/iontech-logo.png",
-    tier: "platinum",
-    website: "https://iontech-pharma.com",
-    description: "Leading pharmaceutical company specializing in ion channel therapeutics"
-  },
-  {
-    id: "sponsor-2",
-    name: "BioChannel Solutions",
-    logo: "/biochannel-logo.png",
-    tier: "gold",
-    website: "https://biochannel-solutions.com",
-    description: "Innovative biotech company focused on ion channel research"
-  },
-  {
-    id: "sponsor-3",
-    name: "Neural Dynamics Inc.",
-    logo: "/neural-dynamics-logo.png",
-    tier: "silver",
-    website: "https://neural-dynamics.com",
-    description: "Research and development in neurological ion channel therapeutics"
-  }
-]
+
 
 // Contact Information - EASILY EDITABLE
 export const contactInfo = {
@@ -440,11 +424,7 @@ export const getSpeakersByExpertise = (expertise: string): Speaker[] => {
   )
 }
 
-export const getSpeakersByInstitution = (institution: string): Speaker[] => {
-  return speakers.filter(speaker => 
-    speaker.title.toLowerCase().includes(institution.toLowerCase())
-  )
-}
+
 
 // Conference Day Management Functions
 export const getConferenceDay = (day: number): ConferenceDay | undefined => {
@@ -457,52 +437,11 @@ export const getSessionsByType = (type: Session['type']): Session[] => {
   )
 }
 
-export const getSessionsBySpeaker = (speakerName: string): Session[] => {
-  return conferenceDays.flatMap(day => 
-    day.sessions.filter(session => 
-      session.speaker.toLowerCase().includes(speakerName.toLowerCase())
-    )
-  )
-}
 
-// Testimonial Management Functions
-export const getTestimonialById = (id: string): Testimonial | undefined => {
-  return testimonials.find(testimonial => testimonial.id === id)
-}
 
-export const getTestimonialsByYear = (year: number): Testimonial[] => {
-  return testimonials.filter(testimonial => testimonial.year === year)
-}
 
-export const getTestimonialsByInstitution = (institution: string): Testimonial[] => {
-  return testimonials.filter(testimonial => 
-    testimonial.institution?.toLowerCase().includes(institution.toLowerCase())
-  )
-}
 
-// Video Management Functions
-export const getVideoById = (id: string): VideoSnippet | undefined => {
-  return videoSnippets.find(video => video.id === id)
-}
 
-export const getVideosByYear = (year: number): VideoSnippet[] => {
-  return videoSnippets.filter(video => video.year === year)
-}
-
-export const getMostViewedVideos = (limit: number = 5): VideoSnippet[] => {
-  return videoSnippets
-    .sort((a, b) => (b.views || 0) - (a.views || 0))
-    .slice(0, limit)
-}
-
-// Sponsor Management Functions
-export const getSponsorsByTier = (tier: Sponsor['tier']): Sponsor[] => {
-  return sponsors.filter(sponsor => sponsor.tier === tier)
-}
-
-export const getSponsorById = (id: string): Sponsor | undefined => {
-  return sponsors.find(sponsor => sponsor.id === id)
-}
 
 // Conference Info Management Functions
 export const getConferenceStats = () => {
@@ -511,8 +450,7 @@ export const getConferenceStats = () => {
     totalSessions: conferenceDays.reduce((acc, day) => acc + day.sessions.length, 0),
     totalDays: conferenceDays.length,
     totalTestimonials: testimonials.length,
-    totalVideos: videoSnippets.length,
-    totalSponsors: sponsors.length
+    totalVideos: videoSnippets.length
   }
 }
 
@@ -521,7 +459,7 @@ export const getUpcomingDeadlines = () => {
   const deadlines = [
     {
       name: "Early Bird Registration",
-      date: new Date(conferenceInfo.earlyBirdDeadline!),
+      date: new Date(conferenceInfo.earlyBirdDeadline || conferenceInfo.registrationDeadline),
       fee: conferenceInfo.earlyBirdFee
     },
     {
@@ -561,13 +499,85 @@ export const getTimeUntilConference = () => {
   }
 }
 
+// Additional Utility Functions
+export const getCurrentConferenceDay = () => {
+  const now = new Date()
+  const startDate = new Date(conferenceInfo.startDate)
+  const endDate = new Date(conferenceInfo.endDate)
+  
+  if (now < startDate) return null
+  if (now > endDate) return null
+  
+  const dayDiff = Math.floor((now.getTime() - startDate.getTime()) / (1000 * 60 * 60 * 24))
+  return conferenceDays[dayDiff] || null
+}
+
+export const getNextSession = () => {
+  const now = new Date()
+  const currentDay = getCurrentConferenceDay()
+  
+  if (!currentDay) return null
+  
+  const currentTime = now.getHours() * 60 + now.getMinutes()
+  
+  for (const session of currentDay.sessions) {
+    const [hours, minutes] = session.time.split(':').map(Number)
+    const sessionTime = hours * 60 + minutes
+    
+    if (sessionTime > currentTime) {
+      return session
+    }
+  }
+  
+  return null
+}
+
+export const getRegistrationStatus = () => {
+  const now = new Date()
+  const earlyBirdDeadline = new Date(conferenceInfo.earlyBirdDeadline || conferenceInfo.registrationDeadline)
+  const registrationDeadline = new Date(conferenceInfo.registrationDeadline)
+  
+  if (now < earlyBirdDeadline) {
+    return {
+      status: "early_bird",
+      message: "Early Bird Registration Open",
+      fee: conferenceInfo.earlyBirdFee
+    }
+  } else if (now < registrationDeadline) {
+    return {
+      status: "regular",
+      message: "Regular Registration Open",
+      fee: conferenceInfo.registrationFee
+    }
+  } else {
+    return {
+      status: "closed",
+      message: "Registration Closed",
+      fee: null
+    }
+  }
+}
+
+export const getFeaturedSpeakers = (limit: number = 3) => {
+  return speakers
+    .sort((a, b) => (b.publications || 0) - (a.publications || 0))
+    .slice(0, limit)
+}
+
+export const getSessionsByDay = (day: number) => {
+  const conferenceDay = getConferenceDay(day)
+  return conferenceDay?.sessions || []
+}
+
+
+
 // ============================================================================
 // INSTRUCTIONS FOR UPDATING DATA:
 // ============================================================================
 /*
 TO ADD A NEW SPEAKER:
 1. Add a new object to the speakers array
-2. Use a unique ID (e.g., "speaker-7")
+2. Use a unique ID (e.g., "speaker-8")
 3. Include all required fields: id, name, title, bio, image, day
 4. Optional fields: session, time, expertise, publications, patents
 
@@ -583,6 +593,15 @@ TO ADD NEW SESSIONS:
 1. Add session objects to the appropriate day in conferenceDays
 2. Use unique session IDs
 3. Update speaker references if needed
+
+TO UPDATE TESTIMONIALS:
+1. Modify the testimonials array
+2. Ensure rating is between 1-5
+3. Include all required fields: id, name, title, content, rating, image
+
+TO UPDATE VIDEO SNIPPETS:
+1. Modify the videoSnippets array
+2. Include all required fields: id, title, description, thumbnail, duration
 
 TO UPDATE CONTACT INFO:
 1. Modify the contactInfo object
