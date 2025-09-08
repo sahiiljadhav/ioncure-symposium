@@ -29,12 +29,14 @@ export default function IonCureConference() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0)
   const [currentVideoSnippet, setCurrentVideoSnippet] = useState(0)
   const [isVideoPlaying, setIsVideoPlaying] = useState(false)
-  const [conferenceStats] = useState(getConferenceStats())
-  const [currentDate, setCurrentDate] = useState(new Date(2025, 9)) // October 2025
+  const [conferenceStats, setConferenceStats] = useState(null)
+  const [currentDate, setCurrentDate] = useState(null) // Will be initialized in useEffect
 
   const conferenceDates = [26, 27, 28]
 
   const navigateMonth = (direction: "prev" | "next") => {
+    if (!currentDate) return
+    
     setCurrentDate((prev) => {
       const newDate = new Date(prev)
       if (direction === "prev") {
@@ -48,6 +50,9 @@ export default function IonCureConference() {
 
 
   const renderCalendar = () => {
+    // Return empty array if currentDate is not initialized yet
+    if (!currentDate) return []
+    
     const year = currentDate.getFullYear()
     const month = currentDate.getMonth()
     const firstDay = new Date(year, month, 1)
@@ -112,6 +117,10 @@ export default function IonCureConference() {
   }
 
   useEffect(() => {
+    // Initialize state values on the client side to prevent hydration mismatch
+    setConferenceStats(getConferenceStats())
+    setCurrentDate(new Date(2025, 9)) // October 2025
+    
     const updateEventStatus = () => {
       const timeData = getTimeUntilConference()
       setEventStatus(timeData.status as "pre" | "live" | "post")
@@ -171,42 +180,6 @@ export default function IonCureConference() {
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-sm border-b border-border">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-16">
-            <div className="flex items-center space-x-2">
-              <img 
-                src="/Logo_Ioncure-removebg-preview.png" 
-                alt="IonCure Logo" 
-                className="w-8 h-8 object-contain"
-              />
-              <span className="font-bold text-foreground">IonCure</span>
-            </div>
-            <div className="hidden md:flex space-x-8">
-              {[
-                { id: "/", label: "Home" },
-                { id: "/about", label: "About" },
-                { id: "/speakers", label: "Speakers" },
-                { id: "/timeline", label: "Timeline" },
-                { id: "/calendar", label: "Calendar" },
-                { id: "/past-conferences", label: "Past Conferences" },
-                { id: "/contact", label: "Contact" },
-              ].map((item) => (
-                <a
-                  key={item.id}
-                  href={item.id}
-                  className={`text-sm font-medium transition-all duration-300 hover:text-primary hover:scale-105 ${
-                    item.id === "/" ? "text-primary font-semibold" : "text-muted-foreground"
-                  }`}
-                >
-                  {item.label}
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </nav>
 
       {/* Hero Section */}
       <section id="home" className="pt-24 min-h-screen flex items-center bg-organic-pattern relative overflow-hidden">
@@ -351,7 +324,7 @@ export default function IonCureConference() {
                   Previous
                 </Button>
                 <CardTitle className="text-xl sm:text-2xl font-bold text-center sm:text-left order-3 sm:order-2 w-full sm:w-auto">
-                  {currentDate.toLocaleDateString("en-US", { month: "long", year: "numeric" })}
+                  {currentDate ? currentDate.toLocaleDateString("en-US", { month: "long", year: "numeric" }) : "Loading..."}
                 </CardTitle>
                 <Button
                   variant="outline"
